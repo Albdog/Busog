@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Busog</string>
+    <string name="title_activity_restaurant">RestaurantActivity</string>
+    <string name="title">Busog</string>
+    <string name="restaurants">Restaurants</string>
+    <string name="nearby_restaurants">Nearby Restaurants</string>
 </resources>
