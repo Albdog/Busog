@@ -4,4 +4,14 @@
     <string name="title">Busog</string>
     <string name="restaurants">Restaurants</string>
     <string name="nearby_restaurants">Nearby Restaurants</string>
+    <string-array name="category_array">
+        <item>Burgers</item>
+        <item>Chicken &amp; Spaghetti</item>
+        <item>Desserts</item>
+        <item>Breakfast</item>
+        <item>Drinks</item>
+        <item>Combos</item>
+        <item>Add-Ons</item>
+    </string-array>
+    <string name="title_activity_menu">MenuActivity</string>
 </resources>
