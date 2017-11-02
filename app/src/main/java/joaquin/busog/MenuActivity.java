@@ -1,28 +1,83 @@
 package joaquin.busog;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.GridLayout;
+import android.widget.GridView;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import au.com.bytecode.opencsv.CSVReader;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class MenuActivity extends ListActivity {
+public class MenuActivity extends Activity {
+
+    @BindView(R.id.menuGrid) GridView menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        ButterKnife.bind(this);
+        loadItems("burger");
+    }
+
+    @OnClick (R.id.burgerButton)
+    public void burger() {
+        loadItems("burger");
+    }
+
+    @OnClick (R.id.riceMealButton)
+    public void riceMeal() {
+        loadItems("riceMeal");
+    }
+
+    @OnClick (R.id.breakfastButton)
+    public void breakfast() {
+        loadItems("breakfast");
+    }
+
+    @OnClick (R.id.dessertButton)
+    public void dessert() {
+        loadItems("dessert");
+    }
+
+    @OnClick (R.id.otherButton)
+    public void other() {
+        loadItems("other");
     }
 
     private void loadItems(String category) {
+        String csvName = "";
+
+        switch (category) {
+            case "burger":
+                csvName = "Burgers";
+                break;
+            case "riceMeal":
+                csvName = "Rice-Meals";
+                break;
+            case "breakfast":
+                csvName = "Breakfast";
+                break;
+            case "dessert":
+                csvName = "Desserts";
+                break;
+            case "other":
+                csvName = "Others";
+                break;
+        }
+
         String next[];
         ArrayList<String[]> list = new ArrayList<>();
         try {
-            CSVReader reader = new CSVReader(new InputStreamReader(getAssets().open("CSV/McDo-Burgers.csv")));
+            CSVReader reader = new CSVReader(new InputStreamReader(getAssets().open("CSV/McDo-" + csvName + ".csv")));
             while(true) {
                 next = reader.readNext();
                 if(next != null) {
@@ -38,10 +93,10 @@ public class MenuActivity extends ListActivity {
         String[] menuItems = new String[list.size()];
 
         for(int i = 0; i < list.size(); i++) {
-            menuItems[i] = list.get(i)[0];
+            menuItems[i] = list.get(i)[1];
         }
 
         MenuAdapter menuAdapter = new MenuAdapter(this, menuItems);
-        setListAdapter(menuAdapter);
+        menu.setAdapter(menuAdapter);
     }
 }

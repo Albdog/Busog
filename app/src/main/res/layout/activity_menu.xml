@@ -25,11 +25,14 @@
 
         <EditText
             android:id="@+id/budgetInput"
-            android:layout_width="wrap_content"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="numberDecimal"/>
+            android:hint="@string/budget_hint"
+            android:inputType="numberDecimal"
+            android:singleLine="false"
+            android:gravity="end"/>
 
         <TextView
             android:id="@+id/currencyText"
@@ -46,35 +49,50 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/burgerButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@android:drawable/btn_dialog"/>
 
         <ImageButton
+            android:id="@+id/riceMealButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@android:drawable/btn_star"/>
 
         <ImageButton
+            android:id="@+id/breakfastButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@android:drawable/btn_star"/>
 
         <ImageButton
+            android:id="@+id/dessertButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:srcCompat="@android:drawable/btn_star"/>
+
+        <ImageButton
+            android:id="@+id/otherButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@android:drawable/btn_star"/>
     </LinearLayout>
 
-    <GridLayout
-        android:id="@+id/itemsLayout"
+    <GridView
+        android:id="@+id/menuGrid"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:numColumns="2"
+        android:columnWidth="90dp"
+        android:horizontalSpacing="10dp"
+        android:verticalSpacing="10dp"
+        android:gravity="center"
+        android:stretchMode="columnWidth"/>
 
-    </GridLayout>
 </LinearLayout>

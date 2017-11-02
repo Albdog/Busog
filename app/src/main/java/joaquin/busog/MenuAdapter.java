@@ -23,17 +23,17 @@ public class MenuAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return mMenuItems.length;
     }
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return mMenuItems[i];
     }
 
     @Override
     public long getItemId(int i) {
-        return 0;
+        return i;
     }
 
     @Override
@@ -50,16 +50,14 @@ public class MenuAdapter extends BaseAdapter {
             menuView.mediumPrice = view.findViewById(R.id.mediumPrice);
             menuView.largePrice = view.findViewById(R.id.largePrice);
 
-            final View finalView = view;
-            menuView.itemName.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(finalView.getContext(), "tests", Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(finalView.getContext(), MenuActivity.class);
-                    finalView.getContext().startActivity(intent);
-                }
-            });
+//            itemName.setText(mMenuItems[i]);
+//            itemName.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Toast.makeText(mContext, "tests", Toast.LENGTH_SHORT).show();
+//                }
+//            });
+            view.setTag(menuView);
         }
         else {
             menuView = (MenuView) view.getTag();
@@ -70,10 +68,10 @@ public class MenuAdapter extends BaseAdapter {
         return view;
     }
 
-    private void updateUI(int i, MenuView menuView) {
+    private void updateUI(int i, MenuView view) {
         String name = mMenuItems[i];
 
-        menuView.itemName.setText(name);
+        view.itemName.setText(name);
     }
 
     private static class MenuView extends AppCompatActivity {

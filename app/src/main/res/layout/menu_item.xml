@@ -24,9 +24,9 @@
             android:id="@+id/itemName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:text="Big Mac"
-            android:gravity="center"/>
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Big Mac"/>
     </LinearLayout>
 
     <LinearLayout
@@ -40,28 +40,28 @@
             android:id="@+id/alaCartePrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="143.00"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:text="143.00"/>
 
         <TextView
             android:id="@+id/smallPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="S 193.00"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:text="S 193.00"/>
 
         <TextView
             android:id="@+id/mediumPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="M 193.00"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:text="M 193.00"/>
 
         <TextView
             android:id="@+id/largePrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="L 210.00"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:text="L 210.00"/>
     </LinearLayout>
 </LinearLayout>
