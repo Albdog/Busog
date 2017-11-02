@@ -2,6 +2,7 @@ package joaquin.busog;
 
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 
 import java.io.IOException;
@@ -39,7 +40,10 @@ public class RestaurantsActivity extends ListActivity {
             restaurants[i] = list.get(i)[0];
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, restaurants);
-        setListAdapter(adapter);
+//        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, restaurants);
+//        setListAdapter(adapter);
+
+        MenuAdapter menuAdapter = new MenuAdapter(this, restaurants);
+        setListAdapter(menuAdapter);
     }
 }
