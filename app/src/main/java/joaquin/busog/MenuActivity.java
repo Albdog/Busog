@@ -1,10 +1,7 @@
 package joaquin.busog;
 
-import android.app.Activity;
-import android.app.ListActivity;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.GridLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.GridView;
 
 import java.io.IOException;
@@ -16,7 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MenuActivity extends Activity {
+public class MenuActivity extends AppCompatActivity {
 
     @BindView(R.id.menuGrid) GridView menu;
 
@@ -25,6 +22,17 @@ public class MenuActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         ButterKnife.bind(this);
+
+//        // my_child_toolbar is defined in the layout file
+//        Toolbar mealCreationToolbar = findViewById(R.id.mealCreationToolbar);
+//        setSupportActionBar(mealCreationToolbar);
+//
+//        // Get a support ActionBar corresponding to this toolbar
+//        ActionBar ab = getSupportActionBar();
+//
+//        // Enable the Up button
+//        ab.setDisplayHomeAsUpEnabled(true);
+
         loadItems("burger");
     }
 
