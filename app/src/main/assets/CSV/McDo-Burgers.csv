@@ -1,12 +1,12 @@
-1,Garlic Parmesan McSpicy,100,139,159,179
-2,McSpicy,100,139,159,179
-3,Cheesy Burger McDo,46,89,109,126
-4,Double Cheese Burger,107,142,162,179
-5,Big Mac,143,173,193,210
-6,Quarter Pounder with Cheese,143,173,193,210
-7,McChicken Sandwich,105,135,155,172
-8,Fillet-O-Fish,105,135,155,172
-9,Cheese Burger Deluxe,82,113,133,150
-10,Cheese Burger,52,95,115,132
-11,Burger McDo,36,82,102,119
-12,Crispy Chicken Sandwich,NA,90,110,127
+1,Garlic Parmesan McSpicy,100,139,159,179,N/A
+2,McSpicy,100,139,159,179,N/A
+3,Cheesy Burger McDo,46,89,109,126,N/A
+4,Double Cheese Burger,107,142,162,179,R.drawable.double_cheese_burger_meal
+5,Big Mac,143,173,193,210,N/A
+6,Quarter Pounder with Cheese,143,173,193,210,N/A
+7,McChicken Sandwich,105,135,155,172,N/A
+8,Fillet-O-Fish,105,135,155,172,N/A
+9,Cheese Burger Deluxe,82,113,133,150,N/A
+10,Cheese Burger,52,95,115,132,N/A
+11,Burger McDo,36,82,102,119,N/A
+12,Crispy Chicken Sandwich,N/A,90,110,127,N/A

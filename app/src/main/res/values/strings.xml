@@ -14,4 +14,5 @@
     <string name="title_activity_menu">MenuActivity</string>
     <string name="meal_creation">Meal Creation</string>
     <string name="budget_hint">0.00</string>
+    <string name="restaurants">Restaurants</string>
 </resources>

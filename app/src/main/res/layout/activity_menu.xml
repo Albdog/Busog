@@ -29,10 +29,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:gravity="end"
             android:hint="@string/budget_hint"
             android:inputType="numberDecimal"
-            android:singleLine="false"
-            android:gravity="end"/>
+            android:singleLine="false"/>
 
         <TextView
             android:id="@+id/currencyText"
@@ -50,45 +50,47 @@
 
         <ImageButton
             android:id="@+id/burgerButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            app:srcCompat="@android:drawable/btn_dialog"/>
+            app:srcCompat="@drawable/burgers"/>
 
         <ImageButton
             android:id="@+id/riceMealButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            app:srcCompat="@android:drawable/btn_star"/>
+            app:srcCompat="@drawable/rice_meals"/>
 
         <ImageButton
             android:id="@+id/breakfastButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            app:srcCompat="@android:drawable/btn_star"/>
+            app:srcCompat="@drawable/breakfast"/>
 
         <ImageButton
             android:id="@+id/dessertButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            app:srcCompat="@android:drawable/btn_star"/>
+            app:srcCompat="@drawable/dessert"/>
 
         <ImageButton
             android:id="@+id/otherButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@android:drawable/btn_star"/>
+            app:srcCompat="@drawable/others"/>
     </LinearLayout>
 
     <GridView
         android:id="@+id/menuGrid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="2"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:numColumns="1"
         android:columnWidth="90dp"
         android:horizontalSpacing="10dp"
         android:verticalSpacing="10dp"

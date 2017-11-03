@@ -1,24 +1,27 @@
 package joaquin.busog;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MenuAdapter extends BaseAdapter {
 
     private Context mContext;
     private String[] mMenuItems;
+    private ArrayList<String[]> mList;
 
-    public MenuAdapter(Context context, String[] menuItems) {
+    public MenuAdapter(Context context, String[] menuItems, ArrayList<String[]> list) {
         mContext = context;
         mMenuItems = menuItems;
+        mList = list;
     }
 
     @Override
@@ -43,6 +46,7 @@ public class MenuAdapter extends BaseAdapter {
         if(view == null) {
             view = LayoutInflater.from(mContext).inflate(R.layout.menu_item, null);
             menuView = new MenuView();
+
             menuView.itemImage = view.findViewById(R.id.itemImage);
             menuView.itemName = view.findViewById(R.id.itemName);
             menuView.alaCartePrice = view.findViewById(R.id.alaCartePrice);
@@ -50,13 +54,6 @@ public class MenuAdapter extends BaseAdapter {
             menuView.mediumPrice = view.findViewById(R.id.mediumPrice);
             menuView.largePrice = view.findViewById(R.id.largePrice);
 
-//            itemName.setText(mMenuItems[i]);
-//            itemName.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Toast.makeText(mContext, "tests", Toast.LENGTH_SHORT).show();
-//                }
-//            });
             view.setTag(menuView);
         }
         else {
@@ -70,8 +67,31 @@ public class MenuAdapter extends BaseAdapter {
 
     private void updateUI(int i, MenuView view) {
         String name = mMenuItems[i];
+        String alaCarte = mList.get(i)[2];
+        String small = mList.get(i)[3];
+        String medium = mList.get(i)[4];
+        String large = mList.get(i)[5];
+//        String imageString = mList.get(i)[6];
 
         view.itemName.setText(name);
+
+        if(alaCarte.equals("N/A")) {}
+        else view.alaCartePrice.setText(Html.fromHtml("<b>AC</b> " + alaCarte + ".00"));
+
+        if(small.equals("N/A")) {}
+        else view.smallPrice.setText(Html.fromHtml("<b>S</b> " + small + ".00"));
+
+        if(medium.equals("N/A")) {}
+        else view.mediumPrice.setText(Html.fromHtml("<b>M</b> " + medium + ".00"));
+
+        if(large.equals("N/A")) {}
+        else view.largePrice.setText(Html.fromHtml("<b>L</b> " + large + ".00"));
+
+//        if(imageString.equals("N/A")) view.itemImage.setImageResource(R.drawable.double_cheese_burger_meal);
+//        else {
+//            int image = Integer.parseInt(imageString);
+//            view.itemImage.setImageResource(image);
+//        }
     }
 
     private static class MenuView extends AppCompatActivity {

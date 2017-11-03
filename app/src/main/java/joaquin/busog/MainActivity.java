@@ -25,4 +25,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MenuActivity.class);
         startActivity(intent);
     }
+
+    @OnClick (R.id.button2)
+    public void test2() {
+        Intent intent = new Intent(this, RestaurantActivity.class);
+        startActivity(intent);
+    }
 }

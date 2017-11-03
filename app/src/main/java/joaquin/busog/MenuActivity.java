@@ -2,6 +2,8 @@ package joaquin.busog;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
+import android.widget.EditText;
 import android.widget.GridView;
 
 import java.io.IOException;
@@ -16,22 +18,13 @@ import butterknife.OnClick;
 public class MenuActivity extends AppCompatActivity {
 
     @BindView(R.id.menuGrid) GridView menu;
+    @BindView(R.id.budgetInput) EditText budget;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         ButterKnife.bind(this);
-
-//        // my_child_toolbar is defined in the layout file
-//        Toolbar mealCreationToolbar = findViewById(R.id.mealCreationToolbar);
-//        setSupportActionBar(mealCreationToolbar);
-//
-//        // Get a support ActionBar corresponding to this toolbar
-//        ActionBar ab = getSupportActionBar();
-//
-//        // Enable the Up button
-//        ab.setDisplayHomeAsUpEnabled(true);
 
         loadItems("burger");
     }
@@ -104,7 +97,7 @@ public class MenuActivity extends AppCompatActivity {
             menuItems[i] = list.get(i)[1];
         }
 
-        MenuAdapter menuAdapter = new MenuAdapter(this, menuItems);
+        MenuAdapter menuAdapter = new MenuAdapter(this, menuItems, list);
         menu.setAdapter(menuAdapter);
     }
 }
