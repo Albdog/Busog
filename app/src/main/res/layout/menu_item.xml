@@ -19,7 +19,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/double_cheese_burger_meal"/>
+            app:srcCompat="@android:drawable/btn_dialog"/>
 
         <TextView
             android:id="@+id/itemName"

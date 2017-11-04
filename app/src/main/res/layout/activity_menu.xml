@@ -20,8 +20,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="Budget:"
-            android:gravity="end"/>
+            android:gravity="end"
+            android:text="Budget:"/>
 
         <EditText
             android:id="@+id/budgetInput"
@@ -45,7 +45,7 @@
     <LinearLayout
         android:id="@+id/categoryLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:orientation="horizontal">
 
         <ImageButton
@@ -53,6 +53,7 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:scaleType="fitCenter"
             app:srcCompat="@drawable/burgers"/>
 
         <ImageButton
@@ -60,20 +61,23 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:scaleType="fitCenter"
             app:srcCompat="@drawable/rice_meals"/>
 
-        <ImageButton
-            android:id="@+id/breakfastButton"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/breakfast"/>
+        <!--<ImageButton-->
+            <!--android:id="@+id/breakfastButton"-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:scaleType="fitCenter"-->
+            <!--app:srcCompat="@drawable/breakfast"/>-->
 
         <ImageButton
             android:id="@+id/dessertButton"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:scaleType="fitCenter"
             app:srcCompat="@drawable/dessert"/>
 
         <ImageButton
@@ -81,6 +85,7 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:scaleType="fitCenter"
             app:srcCompat="@drawable/others"/>
     </LinearLayout>
 
@@ -88,13 +93,13 @@
         android:id="@+id/menuGrid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:columnWidth="90dp"
+        android:gravity="center"
+        android:horizontalSpacing="10dp"
+        android:numColumns="1"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
-        android:numColumns="1"
-        android:columnWidth="90dp"
-        android:horizontalSpacing="10dp"
-        android:verticalSpacing="10dp"
-        android:gravity="center"
-        android:stretchMode="columnWidth"/>
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="10dp"/>
 
 </LinearLayout>

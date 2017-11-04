@@ -1,16 +1,16 @@
-﻿1,1pc. Chicken McDo with Sundae,N/A,115,125,130
-2,1pc. Chicken McDo with McFloat,N/A,N/A,105,N/A
-3,1pc. Chicken McDo with Rice and Fries,N/A,105,125,142
-4,1pc. Chicken McDo with Mushroom Soup,102,115,125,130
-5,1pc. Chicken McDo with McSpaghetti,109,119,129,134
-6,1pc. Chicken McDo,83,89,99,104
-7,2pc. Chicken McDo,149,159,169,174
-8,Chicken Fillet Ala King with Fries,N/A,90,110,127
-9,Chicken Fillet Ala King,57,60,70,75
-10,Crispy Chicken Fillet with Rice,57,60,70,75
-11,Crispy Chicken Fillet w/ Rice & Fries,N/A,90,110,127
-12,McSpaghetti,55,60,70,75
-13,6pc. McNuggets with Fries,N/A,145,165,182
-14,6pc. McNuggets with Rice,N/A,139,149,154
-15,6pc. Chicken McNuggets,110,N/A,N/A,N/A
-16,10pc. Chicken McNuggets,167,N/A,N/A,N/A
+﻿1,1pc. Chicken McDo with Sundae,N/A,115,125,130,N/A
+2,1pc. Chicken McDo with McFloat,N/A,N/A,105,N/A,N/A
+3,1pc. Chicken McDo with Rice and Fries,N/A,105,125,142,N/A
+4,1pc. Chicken McDo with Mushroom Soup,102,115,125,130,N/A
+5,1pc. Chicken McDo with McSpaghetti,109,119,129,134,N/A
+6,1pc. Chicken McDo,83,89,99,104,N/A
+7,2pc. Chicken McDo,149,159,169,174,N/A
+8,Chicken Fillet Ala King with Fries,N/A,90,110,127,N/A
+9,Chicken Fillet Ala King,57,60,70,75,N/A
+10,Crispy Chicken Fillet with Rice,57,60,70,75,crispy_chicken_fillet_meal
+11,Crispy Chicken Fillet w/ Rice & Fries,N/A,90,110,127,N/A
+12,McSpaghetti,55,60,70,75,N/A
+13,6pc. McNuggets with Fries,N/A,145,165,182,N/A
+14,6pc. McNuggets with Rice,N/A,139,149,154,N/A
+15,6pc. Chicken McNuggets,110,N/A,N/A,N/A,N/A
+16,10pc. Chicken McNuggets,167,N/A,N/A,N/A,N/A

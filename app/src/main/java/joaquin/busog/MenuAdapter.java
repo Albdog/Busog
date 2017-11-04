@@ -1,6 +1,7 @@
 package joaquin.busog;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -17,11 +18,13 @@ public class MenuAdapter extends BaseAdapter {
     private Context mContext;
     private String[] mMenuItems;
     private ArrayList<String[]> mList;
+    private String mCategory;
 
-    public MenuAdapter(Context context, String[] menuItems, ArrayList<String[]> list) {
+    public MenuAdapter(Context context, String[] menuItems, ArrayList<String[]> list, String category) {
         mContext = context;
         mMenuItems = menuItems;
         mList = list;
+        mCategory = category;
     }
 
     @Override
@@ -71,7 +74,7 @@ public class MenuAdapter extends BaseAdapter {
         String small = mList.get(i)[3];
         String medium = mList.get(i)[4];
         String large = mList.get(i)[5];
-//        String imageString = mList.get(i)[6];
+        String imageString = mList.get(i)[6];
 
         view.itemName.setText(name);
 
@@ -87,11 +90,30 @@ public class MenuAdapter extends BaseAdapter {
         if(large.equals("N/A")) {}
         else view.largePrice.setText(Html.fromHtml("<b>L</b> " + large + ".00"));
 
-//        if(imageString.equals("N/A")) view.itemImage.setImageResource(R.drawable.double_cheese_burger_meal);
-//        else {
-//            int image = Integer.parseInt(imageString);
-//            view.itemImage.setImageResource(image);
-//        }
+        switch (mCategory) {
+            case "burger":
+                view.itemImage.setImageResource(R.drawable.burgers);
+                break;
+            case "riceMeal":
+                view.itemImage.setImageResource(R.drawable.rice_meals);
+                break;
+//            case "breakfast":
+//                view.itemImage.setImageResource(R.drawable.breakfast);
+//                break;
+            case "dessert":
+                view.itemImage.setImageResource(R.drawable.dessert);
+                break;
+            case "other":
+                view.itemImage.setImageResource(R.drawable.others);
+                break;
+        }
+
+        if(imageString.equals("N/A")) {}
+        else {
+            Resources resources = mContext.getResources();
+            int image = resources.getIdentifier(imageString, "drawable", mContext.getPackageName());
+            view.itemImage.setImageResource(image);
+        }
     }
 
     private static class MenuView extends AppCompatActivity {

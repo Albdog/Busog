@@ -2,7 +2,6 @@ package joaquin.busog;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.InputType;
 import android.widget.EditText;
 import android.widget.GridView;
 
@@ -39,10 +38,10 @@ public class MenuActivity extends AppCompatActivity {
         loadItems("riceMeal");
     }
 
-    @OnClick (R.id.breakfastButton)
-    public void breakfast() {
-        loadItems("breakfast");
-    }
+//    @OnClick (R.id.breakfastButton)
+//    public void breakfast() {
+//        loadItems("breakfast");
+//    }
 
     @OnClick (R.id.dessertButton)
     public void dessert() {
@@ -64,9 +63,9 @@ public class MenuActivity extends AppCompatActivity {
             case "riceMeal":
                 csvName = "Rice-Meals";
                 break;
-            case "breakfast":
-                csvName = "Breakfast";
-                break;
+//            case "breakfast":
+//                csvName = "Breakfast";
+//                break;
             case "dessert":
                 csvName = "Desserts";
                 break;
@@ -97,7 +96,7 @@ public class MenuActivity extends AppCompatActivity {
             menuItems[i] = list.get(i)[1];
         }
 
-        MenuAdapter menuAdapter = new MenuAdapter(this, menuItems, list);
+        MenuAdapter menuAdapter = new MenuAdapter(this, menuItems, list, category);
         menu.setAdapter(menuAdapter);
     }
 }

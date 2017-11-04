@@ -1,10 +1,8 @@
 package joaquin.busog;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -27,9 +25,7 @@ public class RestaurantActivity extends AppCompatActivity {
         String next[];
         ArrayList<String[]> list = new ArrayList<>();
         try {
-            Log.e("supot", "pakyu");
             CSVReader reader = new CSVReader(new InputStreamReader(getAssets().open("CSV/Restaurants.csv")));
-            Log.e("supot", "supot");
             while(true) {
                 next = reader.readNext();
                 if(next != null) {
@@ -47,9 +43,13 @@ public class RestaurantActivity extends AppCompatActivity {
         for(int i = 0; i < list.size(); i++) {
             restaurants[i] = list.get(i)[1];
         }
-        Log.e("supot", restaurants.length + "");
 
-        RestaurantAdapter restaurantAdapter = new RestaurantAdapter(this, restaurants);
+        RestaurantAdapter restaurantAdapter = new RestaurantAdapter(this, restaurants, list);
         grid.setAdapter(restaurantAdapter);
     }
+
+//    public static void viewMenu() {
+//        Intent intent = new Intent(this, MenuActivity.class);
+//        startActivity(intent);
+//    }
 }
