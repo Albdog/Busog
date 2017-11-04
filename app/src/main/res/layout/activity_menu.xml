@@ -32,7 +32,7 @@
             android:gravity="end"
             android:hint="@string/budget_hint"
             android:inputType="numberDecimal"
-            android:singleLine="false"/>
+            android:singleLine="true"/>
 
         <TextView
             android:id="@+id/currencyText"
