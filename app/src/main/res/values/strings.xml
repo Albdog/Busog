@@ -14,4 +14,7 @@
         <item>Add-Ons</item>
     </string-array>
     <string name="title_activity_menu">MenuActivity</string>
+    <string name="welcome_to_busog">Welcome to Busog!</string>
+    <string name="create_meal_plan">Create Meal Plan</string>
+    <string name="busogCAPS">BUSOG</string>
 </resources>

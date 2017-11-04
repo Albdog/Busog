@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:id="@+id/recentMealRestaurantLogo"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_gravity="start"
+        android:layout_margin="10dp"
+        app:srcCompat="@android:drawable/btn_dialog" />
+
+    <TextView
+        android:id="@+id/mealContentsLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/recentMealRestaurantLogo"
+        android:layout_marginTop="10dp"
+        android:text="Meal Contents:"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/mealContents"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/recentMealRestaurantLogo"
+        android:layout_below="@+id/mealContentsLabel"
+        android:text="Content, Content, Content, Content, Content"/>
+
+    <TextView
+        android:id="@+id/mealPriceLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/recentMealRestaurantLogo"
+        android:layout_below="@id/mealContents"
+        android:text="Price: "
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/mealPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mealContents"
+        android:layout_toRightOf="@+id/mealPriceLabel"
+        android:text="000.00"/>
+
+</RelativeLayout>

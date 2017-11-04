@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ImageView
+        android:id="@+id/nearbyRestaurantLogo"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_gravity="start"
+        android:layout_margin="10dp"
+        app:srcCompat="@android:drawable/btn_dialog"/>
+    <TextView
+        android:id="@+id/addressText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/nearbyRestaurantLogo"
+        android:layout_marginTop="15dp"
+        android:text="Address" />
+
+    <TextView
+        android:id="@+id/distanceLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/nearbyRestaurantLogo"
+        android:layout_below="@id/addressText"
+        android:layout_marginTop="10dp"
+        android:text="Distance: "
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/distanceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addressText"
+        android:layout_toRightOf="@id/distanceLabel"
+        android:layout_marginTop="11dp"
+        android:text="0000m"/>
+</RelativeLayout>
