@@ -52,13 +52,12 @@ public class RestaurantAdapter extends BaseAdapter {
 
             view.setTag(restaurantView);
 
-//            restaurantView.restaurantImage.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    RestaurantActivity restaurantActivity = new RestaurantActivity();
-//                    restaurantActivity.viewMenu();
-//                }
-//            });
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    MenuActivity.viewMenu(mContext, (String) restaurantView.restaurantName.getText());
+                }
+            });
         }
         else {
             restaurantView = (RestaurantView) view.getTag();

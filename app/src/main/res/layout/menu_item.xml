@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Item"/>
+            android:text="@string/item"/>
     </LinearLayout>
 
     <LinearLayout
@@ -43,27 +43,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="--"/>
+            android:text="@string/empty"/>
 
         <TextView
             android:id="@+id/smallPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="--"/>
+            android:text="@string/empty"/>
 
         <TextView
             android:id="@+id/mediumPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="--"/>
+            android:text="@string/empty"/>
 
         <TextView
             android:id="@+id/largePrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="--"/>
+            android:text="@string/empty"/>
     </LinearLayout>
 </LinearLayout>

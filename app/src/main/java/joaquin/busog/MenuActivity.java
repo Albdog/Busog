@@ -1,5 +1,7 @@
 package joaquin.busog;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
@@ -19,65 +21,48 @@ public class MenuActivity extends AppCompatActivity {
     @BindView(R.id.menuGrid) GridView menu;
     @BindView(R.id.budgetInput) EditText budget;
 
+    private static String mRestaurant;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         ButterKnife.bind(this);
 
-        loadItems("burger");
+        loadItems("Burgers");
     }
 
     @OnClick (R.id.burgerButton)
     public void burger() {
-        loadItems("burger");
+        loadItems("Burgers");
     }
 
     @OnClick (R.id.riceMealButton)
     public void riceMeal() {
-        loadItems("riceMeal");
+        loadItems("Rice-Meals");
     }
 
 //    @OnClick (R.id.breakfastButton)
 //    public void breakfast() {
-//        loadItems("breakfast");
+//        loadItems("Breakfast");
 //    }
 
     @OnClick (R.id.dessertButton)
     public void dessert() {
-        loadItems("dessert");
+        loadItems("Desserts");
     }
 
     @OnClick (R.id.otherButton)
     public void other() {
-        loadItems("other");
+        loadItems("Others");
     }
 
     private void loadItems(String category) {
-        String csvName = "";
-
-        switch (category) {
-            case "burger":
-                csvName = "Burgers";
-                break;
-            case "riceMeal":
-                csvName = "Rice-Meals";
-                break;
-//            case "breakfast":
-//                csvName = "Breakfast";
-//                break;
-            case "dessert":
-                csvName = "Desserts";
-                break;
-            case "other":
-                csvName = "Others";
-                break;
-        }
 
         String next[];
         ArrayList<String[]> list = new ArrayList<>();
         try {
-            CSVReader reader = new CSVReader(new InputStreamReader(getAssets().open("CSV/McDo-" + csvName + ".csv")));
+            CSVReader reader = new CSVReader(new InputStreamReader(getAssets().open("CSV/" + mRestaurant + "-" + category + ".csv")));
             while(true) {
                 next = reader.readNext();
                 if(next != null) {
@@ -98,5 +83,12 @@ public class MenuActivity extends AppCompatActivity {
 
         MenuAdapter menuAdapter = new MenuAdapter(this, menuItems, list, category);
         menu.setAdapter(menuAdapter);
+    }
+
+    public static void viewMenu(Context context, String restaurant) {
+        mRestaurant = restaurant;
+
+        Intent intent = new Intent(context, MenuActivity.class);
+        context.startActivity(intent);
     }
 }
