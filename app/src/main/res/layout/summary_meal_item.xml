@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/summaryMealImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        app:srcCompat="@android:drawable/btn_dialog" />
+    <TextView
+        android:id="@+id/summaryMealDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/summaryMealImage"
+        android:layout_marginTop="20dp"
+        android:text="Meal Description"/>
+    <TextView
+        android:id="@+id/summaryQuantityLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@id/summaryMealImage"
+        android:layout_below="@id/summaryMealDescription"
+        android:text="Quantity: "
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/summaryQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/summaryMealDescription"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/summaryQuantityLabel"
+        android:text="0"/>
+    <TextView
+        android:id="@+id/summaryPriceLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_below="@id/summaryQuantityLabel"
+        android:layout_toRightOf="@id/summaryMealImage"
+        android:text="Price:"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/summaryPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/summaryQuantityLabel"
+        android:layout_toRightOf="@id/summaryPriceLabel"
+        android:text="000.00" />
+</RelativeLayout>
