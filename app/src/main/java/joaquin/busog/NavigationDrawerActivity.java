@@ -50,7 +50,7 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Botto
             case R.id.action_map:
                 if(pageSelected != 1) {
                     pageSelected = 1;
-                    selectedFragment = new HomeScreenTabFragment();
+                    selectedFragment = new MapTabFragment();
                     FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                     fragmentTransaction.replace(R.id.fragmentContainer,selectedFragment);
                     fragmentTransaction.commit();
