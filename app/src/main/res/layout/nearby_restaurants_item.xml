@@ -25,7 +25,7 @@
         android:layout_toRightOf="@+id/nearbyRestaurantLogo"
         android:layout_below="@id/addressText"
         android:layout_marginTop="10dp"
-        android:text="Distance: "
+        android:text="@string/distance_label"
         android:textStyle="bold"/>
 
     <TextView

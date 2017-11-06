@@ -6,13 +6,13 @@
         android:enabled="true"
         android:icon="@drawable/home"
         app:showAsAction="always"
-        android:title="Home" />
+        android:title="@string/home_title" />
     <item
         android:id="@+id/action_map"
         android:enabled="true"
         android:icon="@drawable/map_icon"
         app:showAsAction="always"
-        android:title="Map"
+        android:title="@string/map_title"
         />
 
 </menu>

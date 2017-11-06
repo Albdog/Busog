@@ -24,7 +24,7 @@
         android:layout_margin="5dp"
         android:layout_toRightOf="@id/summaryMealImage"
         android:layout_below="@id/summaryMealDescription"
-        android:text="Quantity: "
+        android:text="@string/quantity_label"
         android:textStyle="bold"/>
     <TextView
         android:id="@+id/summaryQuantity"
@@ -42,7 +42,7 @@
         android:layout_marginRight="10dp"
         android:layout_below="@id/summaryQuantityLabel"
         android:layout_toRightOf="@id/summaryMealImage"
-        android:text="Price:"
+        android:text="@string/price_label"
         android:textStyle="bold"/>
     <TextView
         android:id="@+id/summaryPrice"
