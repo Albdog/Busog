@@ -1,8 +1,8 @@
 package joaquin.busog;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -16,6 +16,7 @@ import android.view.MenuItem;
 public class NavigationDrawerActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     private BottomNavigationView bottomNavigationView;
+    private int pageSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +27,11 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Botto
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
         HomeScreenTabFragment fragment = new HomeScreenTabFragment();
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.fragmentContainer,fragment);
         fragmentTransaction.commit();
+        pageSelected = 0;
     }
 
     @Override
@@ -37,16 +39,26 @@ public class NavigationDrawerActivity extends AppCompatActivity implements Botto
         Fragment selectedFragment = null;
         switch(item.getItemId()){
             case R.id.action_home:
-                selectedFragment = new HomeScreenTabFragment();
+                if(pageSelected != 0) {
+                    pageSelected = 0;
+                    selectedFragment = new HomeScreenTabFragment();
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.fragmentContainer,selectedFragment);
+                    fragmentTransaction.commit();
+                }
                 break;
             case R.id.action_map:
-                //TO-DO change to Map Fragment when finished
-                selectedFragment = new HomeScreenTabFragment();
+                if(pageSelected != 1) {
+                    pageSelected = 1;
+                    selectedFragment = new HomeScreenTabFragment();
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.fragmentContainer,selectedFragment);
+                    fragmentTransaction.commit();
+                }
+                break;
+            default:
                 break;
         }
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentContainer, selectedFragment);
-        fragmentTransaction.commit();
         return true;
     }
 }

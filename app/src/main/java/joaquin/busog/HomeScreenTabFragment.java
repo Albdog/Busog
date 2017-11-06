@@ -3,6 +3,7 @@ package joaquin.busog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,7 +16,7 @@ import android.widget.ListAdapter;
  * Created by Migue909 on 03/11/2017.
  */
 
-public class HomeScreenTabFragment extends android.app.Fragment {
+public class HomeScreenTabFragment extends Fragment{
 
     private Button createMealPlanButton;
 
