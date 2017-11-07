@@ -10,12 +10,11 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="joaquin.busog.MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
+    <Button
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:text="Hello World!"/>
+        android:text="Restaurants"/>
 </RelativeLayout>
