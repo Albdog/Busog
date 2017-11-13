@@ -38,20 +38,16 @@ public class HomeScreenTabFragment extends Fragment{
         RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(getActivity());
         nearbyRestaurantsRecyclerView.setLayoutManager(layoutManager2);
 
-        createMealPlanButton = (Button) view.findViewById(R.id.createMealButton);
-
-        /* Intent to RestaurantActivity
+        createMealPlanButton = view.findViewById(R.id.createMealButton);
 
         createMealPlanButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                Intent viewRestaurants = new Intent(this, RestaurantActivity.class);
+                Intent viewRestaurants = new Intent(getActivity(), RestaurantActivity.class);
                 startActivity(viewRestaurants);
-                finish();
             }
         });
-        */
 
         return view;
 
