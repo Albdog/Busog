@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="joaquin.busog">
+    package="joaquin.busog">
 
     <application
         android:allowBackup="true"
@@ -9,21 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--Fix this-->
-        <activity android:name=".SplashscreenActivity"/>
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN"/>-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-            <!--</intent-filter>-->
-        <!--</activity>-->
-        <activity android:name=".NavigationDrawerActivity">
+        <activity
+            android:name=".SplashscreenActivity"
+            android:theme="@style/StartupTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".NavigationDrawerActivity"
+            android:theme="@style/StartupTheme" />
         <activity
             android:name=".RestaurantActivity"
             android:label="Restaurants"
@@ -33,7 +31,7 @@
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="NavigationDrawerActivity"/>
+                android:value="NavigationDrawerActivity" />
         </activity>
         <activity
             android:name=".MenuActivity"
@@ -44,7 +42,7 @@
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="RestaurantActivity"/>
+                android:value="RestaurantActivity" />
         </activity>
     </application>
 </manifest>
