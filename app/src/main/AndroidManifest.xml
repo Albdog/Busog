@@ -10,14 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <!--Fix this-->
-        <activity android:name=".SplashscreenActivity"/>
+        <activity android:name=".home.SplashscreenActivity"/>
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN"/>-->
 
                 <!--<category android:name="android.intent.category.LAUNCHER"/>-->
             <!--</intent-filter>-->
         <!--</activity>-->
-        <activity android:name=".NavigationDrawerActivity">
+        <activity android:name=".home.NavigationDrawerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -25,26 +25,26 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RestaurantActivity"
+            android:name=".mealPlan.RestaurantActivity"
             android:label="Restaurants"
-            android:parentActivityName=".NavigationDrawerActivity"
+            android:parentActivityName=".home.NavigationDrawerActivity"
             android:windowSoftInputMode="stateHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="NavigationDrawerActivity"/>
+                android:value=".home.NavigationDrawerActivity"/>
         </activity>
         <activity
-            android:name=".MenuActivity"
+            android:name=".mealPlan.MenuActivity"
             android:label="@string/meal_creation"
-            android:parentActivityName=".RestaurantActivity"
+            android:parentActivityName=".mealPlan.RestaurantActivity"
             android:windowSoftInputMode="stateHidden">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="RestaurantActivity"/>
+                android:value=".mealPlan.RestaurantActivity"/>
         </activity>
     </application>
 </manifest>

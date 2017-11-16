@@ -1,4 +1,4 @@
-package joaquin.busog;
+package joaquin.busog.mealPlan;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -15,6 +15,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import joaquin.busog.R;
 
 public class MenuAdapter extends BaseAdapter {
 
@@ -120,16 +122,16 @@ public class MenuAdapter extends BaseAdapter {
 
         view.itemName.setText(name);
 
-        if(alaCarte.equals("N/A")) {}
+        if(alaCarte.equals("N/A")) view.alaCartePrice.setText("--");
         else view.alaCartePrice.setText(Html.fromHtml("<b>AC</b> " + alaCarte + ".00"));
 
-        if(small.equals("N/A")) {}
+        if(small.equals("N/A")) view.smallPrice.setText("--");
         else view.smallPrice.setText(Html.fromHtml("<b>S</b> " + small + ".00"));
 
-        if(medium.equals("N/A")) {}
+        if(medium.equals("N/A")) view.mediumPrice.setText("--");
         else view.mediumPrice.setText(Html.fromHtml("<b>M</b> " + medium + ".00"));
 
-        if(large.equals("N/A")) {}
+        if(large.equals("N/A")) view.largePrice.setText("--");
         else view.largePrice.setText(Html.fromHtml("<b>L</b> " + large + ".00"));
 
         switch (mCategory) {
@@ -144,6 +146,9 @@ public class MenuAdapter extends BaseAdapter {
 //                break;
             case "Desserts":
                 view.itemImage.setImageResource(R.drawable.dessert);
+                break;
+            case "Drinks":
+                view.itemImage.setImageResource(R.drawable.drink);
                 break;
             case "Others":
                 view.itemImage.setImageResource(R.drawable.others);

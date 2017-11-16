@@ -1,4 +1,4 @@
-package joaquin.busog;
+package joaquin.busog.home;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ListAdapter;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+import joaquin.busog.R;
+import joaquin.busog.mealPlan.RestaurantActivity;
 
 /**
  * Created by Migue909 on 03/11/2017.
@@ -18,13 +23,14 @@ import android.widget.ListAdapter;
 
 public class HomeScreenTabFragment extends Fragment{
 
-    private Button createMealPlanButton;
-
+    @BindView(R.id.createMealButton) Button createMealButton;
+    private Unbinder mUnbinder;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.homescreen_tab_fragment,container, false);
+        mUnbinder = ButterKnife.bind(this, view);
 
         RecyclerView recentMealsRecyclerView = view.findViewById(R.id.recentMealsList);
         RecentMealAdapter recentMealAdapter = new RecentMealAdapter();
@@ -38,20 +44,13 @@ public class HomeScreenTabFragment extends Fragment{
         RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(getActivity());
         nearbyRestaurantsRecyclerView.setLayoutManager(layoutManager2);
 
-        createMealPlanButton = (Button) view.findViewById(R.id.createMealButton);
-
-        /* Intent to RestaurantActivity
-
-        createMealPlanButton.setOnClickListener(new View.OnClickListener() {
-
+        createMealButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent viewRestaurants = new Intent(this, RestaurantActivity.class);
-                startActivity(viewRestaurants);
-                finish();
+                Intent intent = new Intent(getContext(), RestaurantActivity.class);
+                startActivity(intent);
             }
         });
-        */
 
         return view;
 
@@ -61,5 +60,10 @@ public class HomeScreenTabFragment extends Fragment{
     public void onResume() {
         super.onResume();
 
+    }
+
+    @Override public void onDestroyView() {
+        super.onDestroyView();
+        mUnbinder.unbind();
     }
 }

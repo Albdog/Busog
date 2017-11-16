@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="joaquin.busog.RestaurantActivity">
+    tools:context="joaquin.busog.mealPlan.RestaurantActivity">
 
     <GridView
         android:id="@+id/restaurantGrid"

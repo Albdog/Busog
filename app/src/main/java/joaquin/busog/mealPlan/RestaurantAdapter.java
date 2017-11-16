@@ -1,4 +1,4 @@
-package joaquin.busog;
+package joaquin.busog.mealPlan;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import joaquin.busog.R;
 
 public class RestaurantAdapter extends BaseAdapter {
 

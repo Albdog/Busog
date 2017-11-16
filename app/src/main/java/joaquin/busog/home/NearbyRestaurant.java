@@ -1,4 +1,6 @@
-package joaquin.busog;
+package joaquin.busog.home;
+
+import joaquin.busog.R;
 
 /**
  * Created by Migue909 on 04/11/2017.

@@ -16,7 +16,7 @@
     <string name="price_label">Price: </string>
     <string name="total_num_items_label">Total # of Items: </string>
     <string name="meal_summary_title">Meal Summary</string>
-    <string name="total_label">Total: </string>
+    <string name="total_label">Total: Php </string>
     <string name="quantity_label">Quantity: </string>
     <string name="home_title">Home</string>
     <string name="map_title">Map</string>

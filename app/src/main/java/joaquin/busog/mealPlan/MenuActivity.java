@@ -1,4 +1,4 @@
-package joaquin.busog;
+package joaquin.busog.mealPlan;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +15,7 @@ import au.com.bytecode.opencsv.CSVReader;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import joaquin.busog.R;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -50,6 +51,11 @@ public class MenuActivity extends AppCompatActivity {
     @OnClick (R.id.dessertButton)
     public void dessert() {
         loadItems("Desserts");
+    }
+
+    @OnClick (R.id.drinkButton)
+    public void drink() {
+        loadItems("Drinks");
     }
 
     @OnClick (R.id.otherButton)

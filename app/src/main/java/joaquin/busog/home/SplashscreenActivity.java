@@ -1,8 +1,10 @@
-package joaquin.busog;
+package joaquin.busog.home;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import joaquin.busog.R;
 
 /**
  * Created by Migue909 on 04/11/2017.

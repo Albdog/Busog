@@ -1,4 +1,4 @@
-package joaquin.busog;
+package joaquin.busog.mealPlan;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import au.com.bytecode.opencsv.CSVReader;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import joaquin.busog.R;
 
 public class RestaurantActivity extends AppCompatActivity {
 

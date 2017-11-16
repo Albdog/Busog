@@ -13,20 +13,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/AppTheme.AppBarOverlay">
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/Toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:popupTheme="@style/AppTheme.PopupOverlay">
-                <TextView
-                    android:id="@+id/toolbarTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/busogCAPS"
-                    android:layout_gravity="center"
-                    android:textSize="18sp"
-                    android:textColor="@android:color/white"/>
-            </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
 
         <FrameLayout
@@ -45,12 +31,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@color/colorPrimary"
+        android:layout_below="@+id/fragmentContainer"
         app:itemBackground="@color/colorPrimary"
         app:itemIconTint="@color/colorAccentLight"
         app:itemTextColor="@color/colorAccentLight"
         app:elevation="8dp"
         app:menu="@menu/bottom_menu"
-        app:layout_insetEdge="bottom" />
+        app:layout_insetEdge="bottom"/>
 
 
 </android.support.design.widget.CoordinatorLayout>
