@@ -48,9 +48,4 @@ public class RestaurantActivity extends AppCompatActivity {
         RestaurantAdapter restaurantAdapter = new RestaurantAdapter(this, restaurants, list);
         grid.setAdapter(restaurantAdapter);
     }
-
-//    public static void viewMenu() {
-//        Intent intent = new Intent(this, MenuActivity.class);
-//        startActivity(intent);
-//    }
 }

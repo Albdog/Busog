@@ -57,7 +57,7 @@ public class RestaurantAdapter extends BaseAdapter {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    MenuActivity.viewMenu(mContext, (String) restaurantView.restaurantName.getText());
+                    MenuActivity.viewMenu(mContext, (String) restaurantView.restaurantName.getText(), (Integer) restaurantView.restaurantImage.getTag());
                 }
             });
         }
@@ -75,10 +75,11 @@ public class RestaurantAdapter extends BaseAdapter {
         String imageString = mList.get(i)[2];
 
         Resources resources = mContext.getResources();
-        int image = resources.getIdentifier(imageString, "drawable", mContext.getPackageName());
+        int mImage = resources.getIdentifier(imageString, "drawable", mContext.getPackageName());
 
         view.restaurantName.setText(name);
-        view.restaurantImage.setImageResource(image);
+        view.restaurantImage.setImageResource(mImage);
+        view.restaurantImage.setTag(mImage);
     }
 
     private static class RestaurantView extends AppCompatActivity {

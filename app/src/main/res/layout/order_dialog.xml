@@ -32,7 +32,7 @@
             android:text="@string/quantity"/>
 
         <EditText
-            android:id="@+id/quantityEditText"
+            android:id="@+id/quantityInput"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -43,6 +43,7 @@
     </LinearLayout>
 
     <RadioGroup
+        android:id="@+id/mealSizeGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center">

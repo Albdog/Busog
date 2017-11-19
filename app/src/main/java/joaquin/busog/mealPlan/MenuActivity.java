@@ -20,9 +20,10 @@ import joaquin.busog.R;
 public class MenuActivity extends AppCompatActivity {
 
     @BindView(R.id.menuGrid) GridView menu;
-    @BindView(R.id.budgetInput) EditText budget;
+    @BindView(R.id.budgetInput) EditText budgetInput;
 
     private static String mRestaurant;
+    private static int mImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +64,14 @@ public class MenuActivity extends AppCompatActivity {
         loadItems("Others");
     }
 
+    @OnClick (R.id.summaryButton)
+    public void cart() {
+        SummaryActivity.setRestaurant(mRestaurant, mImage);
+
+        Intent intent = new Intent(this, SummaryActivity.class);
+        startActivity(intent);
+    }
+
     private void loadItems(String category) {
 
         String next[];
@@ -91,8 +100,9 @@ public class MenuActivity extends AppCompatActivity {
         menu.setAdapter(menuAdapter);
     }
 
-    public static void viewMenu(Context context, String restaurant) {
+    public static void viewMenu(Context context, String restaurant, int image) {
         mRestaurant = restaurant;
+        mImage = image;
 
         Intent intent = new Intent(context, MenuActivity.class);
         context.startActivity(intent);

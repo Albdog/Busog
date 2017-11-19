@@ -5,14 +5,18 @@ import android.content.res.Resources;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -20,10 +24,12 @@ import joaquin.busog.R;
 
 public class MenuAdapter extends BaseAdapter {
 
+    public static ArrayList<Order> orders = new ArrayList<Order>();
+
     private Context mContext;
     private String[] mMenuItems;
     private ArrayList<String[]> mList;
-    private String mCategory;
+    private String mCategory, mBudget;
 
     public MenuAdapter(Context context, String[] menuItems, ArrayList<String[]> list, String category) {
         mContext = context;
@@ -49,9 +55,17 @@ public class MenuAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
+        final Menu menu;
         final MenuView menuView;
 
         if(view == null) {
+            view = LayoutInflater.from(mContext).inflate(R.layout.activity_menu, null);
+            menu = new Menu();
+
+            menu.budgetInput = view.findViewById(R.id.budgetInput);
+            view.setTag(menu);
+            updateMenuUI(menu);
+
             view = LayoutInflater.from(mContext).inflate(R.layout.menu_item, null);
             menuView = new MenuView();
 
@@ -68,11 +82,13 @@ public class MenuAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View view) {
                     final OrderView orderView;
-                    
+
                     AlertDialog.Builder orderBuilder = new AlertDialog.Builder(mContext);
                     view = LayoutInflater.from(mContext).inflate(R.layout.order_dialog, null);
                     orderView = new OrderView();
+                    orderView.quantityInput = view.findViewById(R.id.quantityInput);
                     orderView.itemName = view.findViewById(R.id.itemName);
+                    orderView.mealSizeGroup = view.findViewById(R.id.mealSizeGroup);
                     orderView.alaCarteRadioButton = view.findViewById(R.id.alaCarteRadioButton);
                     orderView.smallRadioButton = view.findViewById(R.id.smallRadioButton);
                     orderView.mediumRadioButton = view.findViewById(R.id.mediumRadioButton);
@@ -80,11 +96,15 @@ public class MenuAdapter extends BaseAdapter {
                     orderView.cancelButton = view.findViewById(R.id.cancelButton);
                     orderView.orderButton = view.findViewById(R.id.orderButton);
 
-                    updateDialogUI(i, orderView);
+                    updateDialogUI((String) menuView.itemName.getText(), orderView);
                     
                     orderBuilder.setView(view);
                     final AlertDialog dialog = orderBuilder.create();
-                    dialog.show();
+
+//                    if(mBudget.equals(""))
+//                        Toast.makeText(mContext, "Please enter budget.", Toast.LENGTH_SHORT).show();
+//                    else
+                        dialog.show();
 
                     orderView.cancelButton.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -96,8 +116,47 @@ public class MenuAdapter extends BaseAdapter {
                     orderView.orderButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            //method to add item to cart
-                            dialog.hide();
+                            if(TextUtils.isEmpty(orderView.quantityInput.getText()))
+                                Toast.makeText(mContext, "Please enter quantity of order.", Toast.LENGTH_SHORT).show();
+                            else if(Integer.parseInt(orderView.quantityInput.getText().toString()) == 0)
+                                Toast.makeText(mContext, "Cannot order 0 items.", Toast.LENGTH_SHORT).show();
+                            else if(orderView.mealSizeGroup.getCheckedRadioButtonId() == -1)
+                                Toast.makeText(mContext, "Please select meal type.", Toast.LENGTH_SHORT).show();
+                            else {
+                                int selectedId = orderView.mealSizeGroup.getCheckedRadioButtonId();
+
+                                if(selectedId == orderView.alaCarteRadioButton.getId()) {
+                                    String temp = (String) orderView.alaCarteRadioButton.getText();
+                                    String[] split = temp.split(" ");
+                                    double price = Double.parseDouble(split[3]);
+
+                                    orders.add(new Order(Integer.parseInt(orderView.quantityInput.getText().toString()), (String) orderView.itemName.getText(), price, (Integer) menuView.itemImage.getTag(), "Ala Carte"));
+                                }
+                                else if(selectedId == orderView.smallRadioButton.getId()) {
+                                    String temp = (String) orderView.smallRadioButton.getText();
+                                    String[] split = temp.split(" ");
+                                    double price = Double.parseDouble(split[2]);
+
+                                    orders.add(new Order(Integer.parseInt(orderView.quantityInput.getText().toString()), (String) orderView.itemName.getText(), price, (Integer) menuView.itemImage.getTag(), "Small"));
+                                }
+                                else if(selectedId == orderView.mediumRadioButton.getId()) {
+                                    String temp = (String) orderView.mediumRadioButton.getText();
+                                    String[] split = temp.split(" ");
+                                    double price = Double.parseDouble(split[2]);
+
+                                    orders.add(new Order(Integer.parseInt(orderView.quantityInput.getText().toString()), (String) orderView.itemName.getText(), price, (Integer) menuView.itemImage.getTag(), "Medium"));
+                                }
+                                else if(selectedId == orderView.largeRadioButton.getId()) {
+                                    String temp = (String) orderView.largeRadioButton.getText();
+                                    String[] split = temp.split(" ");
+                                    double price = Double.parseDouble(split[2]);
+
+                                    orders.add(new Order(Integer.parseInt(orderView.quantityInput.getText().toString()), (String) orderView.itemName.getText(), price, (Integer) menuView.itemImage.getTag(), "Large"));
+                                }
+
+                                Toast.makeText(mContext, "Order saved", Toast.LENGTH_SHORT).show();
+                                dialog.hide();
+                            }
                         }
                     });
                 }
@@ -137,21 +196,26 @@ public class MenuAdapter extends BaseAdapter {
         switch (mCategory) {
             case "Burgers":
                 view.itemImage.setImageResource(R.drawable.burgers);
+                view.itemImage.setTag(R.drawable.burgers);
                 break;
             case "Rice-Meals":
                 view.itemImage.setImageResource(R.drawable.rice_meals);
+                view.itemImage.setTag(R.drawable.rice_meals);
                 break;
 //            case "Breakfast":
 //                view.itemImage.setImageResource(R.drawable.breakfast);
 //                break;
             case "Desserts":
                 view.itemImage.setImageResource(R.drawable.dessert);
+                view.itemImage.setTag(R.drawable.dessert);
                 break;
             case "Drinks":
                 view.itemImage.setImageResource(R.drawable.drink);
+                view.itemImage.setTag(R.drawable.drink);
                 break;
             case "Others":
                 view.itemImage.setImageResource(R.drawable.others);
+                view.itemImage.setTag(R.drawable.others);
                 break;
         }
 
@@ -160,6 +224,7 @@ public class MenuAdapter extends BaseAdapter {
             Resources resources = mContext.getResources();
             int image = resources.getIdentifier(imageString, "drawable", mContext.getPackageName());
             view.itemImage.setImageResource(image);
+            view.itemImage.setTag(image);
         }
     }
 
@@ -168,7 +233,14 @@ public class MenuAdapter extends BaseAdapter {
         TextView itemName, alaCartePrice, smallPrice, mediumPrice, largePrice;
     }
 
-    private void updateDialogUI(int i, OrderView view) {
+    private void updateDialogUI(String item, OrderView view) {
+        int i = 0;
+        for(int j = 0; j < mList.size(); j++) {
+            if(mList.get(j)[1].equals(item)) {
+                i = j;
+                break;
+            }
+        }
         String name = mMenuItems[i];
         String alaCarte = mList.get(i)[2];
         String small = mList.get(i)[3];
@@ -192,7 +264,17 @@ public class MenuAdapter extends BaseAdapter {
     
     private static class OrderView extends AppCompatActivity {
         TextView itemName;
+        EditText quantityInput;
+        RadioGroup mealSizeGroup;
         RadioButton alaCarteRadioButton, smallRadioButton, mediumRadioButton, largeRadioButton;
         Button cancelButton, orderButton;
+    }
+
+    private static class Menu extends AppCompatActivity {
+        EditText budgetInput;
+    }
+
+    private void updateMenuUI(Menu menu) {
+        menu.budgetInput.setText("1");
     }
 }

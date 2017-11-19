@@ -36,5 +36,7 @@
     <string name="empty">--</string>
     <string name="restaurant">Restaurant</string>
     <string name="quantity_hint">0</string>
+    <string name="meal_summary">Meal Summary</string>
+    <string name="remove"><u>Remove</u></string>
 </resources>
 
