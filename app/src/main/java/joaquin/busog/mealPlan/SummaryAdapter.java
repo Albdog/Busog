@@ -66,6 +66,7 @@ public class SummaryAdapter extends BaseAdapter {
                             notifyDataSetChanged();
 
                             SummaryActivity.calculate();
+                            ((SummaryActivity)mContext).updateUI();
 
                             Toast.makeText(mContext, "Item removed.", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();

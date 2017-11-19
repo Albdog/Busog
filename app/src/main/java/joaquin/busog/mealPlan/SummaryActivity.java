@@ -33,8 +33,7 @@ public class SummaryActivity extends AppCompatActivity {
         restaurantImage.setImageResource(mImage);
 
         calculate();
-        orderQuantity.setText("Total # of Items: " + totalQuantity);
-        cost.setText("Total: Php " + String.format("%.2f", totalCost));
+        updateUI();
 
         SummaryAdapter summaryAdapter = new SummaryAdapter(this);
         orderList.setAdapter(summaryAdapter);
@@ -56,5 +55,10 @@ public class SummaryActivity extends AppCompatActivity {
             totalCost += price * quantity;
             totalQuantity += quantity;
         }
+    }
+
+    public void updateUI() {
+        orderQuantity.setText("Total # of Items: " + totalQuantity);
+        cost.setText("Total: Php " + String.format("%.2f", totalCost));
     }
 }

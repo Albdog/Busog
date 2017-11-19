@@ -107,4 +107,21 @@ public class MenuActivity extends AppCompatActivity {
         Intent intent = new Intent(context, MenuActivity.class);
         context.startActivity(intent);
     }
+
+    public void updateBudget(double price) {
+        double budget = getBudget();
+        budget -= price;
+        if(budget < 0) budget = 0;
+
+        budgetInput.setText(String.format("%.2f", budget));
+    }
+
+    public double getBudget() {
+        try {
+            return Double.parseDouble(budgetInput.getText().toString());
+        }
+        catch (NumberFormatException nfe) {
+            return 0;
+        }
+    }
 }

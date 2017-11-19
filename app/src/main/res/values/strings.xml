@@ -38,5 +38,7 @@
     <string name="quantity_hint">0</string>
     <string name="meal_summary">Meal Summary</string>
     <string name="remove"><u>Remove</u></string>
+    <string name="set_budget">Set Budget</string>
+    <string name="save">Save</string>
 </resources>
 

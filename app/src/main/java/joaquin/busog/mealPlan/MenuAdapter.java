@@ -64,7 +64,6 @@ public class MenuAdapter extends BaseAdapter {
 
             menu.budgetInput = view.findViewById(R.id.budgetInput);
             view.setTag(menu);
-            updateMenuUI(menu);
 
             view = LayoutInflater.from(mContext).inflate(R.layout.menu_item, null);
             menuView = new MenuView();
@@ -126,36 +125,17 @@ public class MenuAdapter extends BaseAdapter {
                                 int selectedId = orderView.mealSizeGroup.getCheckedRadioButtonId();
 
                                 if(selectedId == orderView.alaCarteRadioButton.getId()) {
-                                    String temp = (String) orderView.alaCarteRadioButton.getText();
-                                    String[] split = temp.split(" ");
-                                    double price = Double.parseDouble(split[3]);
-
-                                    orders.add(new Order(Integer.parseInt(orderView.quantityInput.getText().toString()), (String) orderView.itemName.getText(), price, (Integer) menuView.itemImage.getTag(), "Ala Carte"));
+                                    order(orderView, menuView, dialog, "Ala Carte");
                                 }
                                 else if(selectedId == orderView.smallRadioButton.getId()) {
-                                    String temp = (String) orderView.smallRadioButton.getText();
-                                    String[] split = temp.split(" ");
-                                    double price = Double.parseDouble(split[2]);
-
-                                    orders.add(new Order(Integer.parseInt(orderView.quantityInput.getText().toString()), (String) orderView.itemName.getText(), price, (Integer) menuView.itemImage.getTag(), "Small"));
+                                    order(orderView, menuView, dialog, "Small");
                                 }
                                 else if(selectedId == orderView.mediumRadioButton.getId()) {
-                                    String temp = (String) orderView.mediumRadioButton.getText();
-                                    String[] split = temp.split(" ");
-                                    double price = Double.parseDouble(split[2]);
-
-                                    orders.add(new Order(Integer.parseInt(orderView.quantityInput.getText().toString()), (String) orderView.itemName.getText(), price, (Integer) menuView.itemImage.getTag(), "Medium"));
+                                    order(orderView, menuView, dialog, "Medium");
                                 }
                                 else if(selectedId == orderView.largeRadioButton.getId()) {
-                                    String temp = (String) orderView.largeRadioButton.getText();
-                                    String[] split = temp.split(" ");
-                                    double price = Double.parseDouble(split[2]);
-
-                                    orders.add(new Order(Integer.parseInt(orderView.quantityInput.getText().toString()), (String) orderView.itemName.getText(), price, (Integer) menuView.itemImage.getTag(), "Large"));
+                                    order(orderView, menuView, dialog, "Large");
                                 }
-
-                                Toast.makeText(mContext, "Order saved", Toast.LENGTH_SHORT).show();
-                                dialog.hide();
                             }
                         }
                     });
@@ -274,7 +254,40 @@ public class MenuAdapter extends BaseAdapter {
         EditText budgetInput;
     }
 
-    private void updateMenuUI(Menu menu) {
-        menu.budgetInput.setText("1");
+    private void order(OrderView orderView, MenuView menuView, AlertDialog dialog, String mealType) {
+        double price;
+
+        if(mealType.equals("Ala Carte")) {
+            String temp = (String) orderView.alaCarteRadioButton.getText();
+            String[] split = temp.split(" ");
+
+            price = Double.parseDouble(split[3]);
+        }
+        else if(mealType.equals("Small")) {
+            String temp = (String) orderView.smallRadioButton.getText();
+            String[] split = temp.split(" ");
+            price = Double.parseDouble(split[2]);
+        }
+        else if(mealType.equals("Medium")) {
+            String temp = (String) orderView.mediumRadioButton.getText();
+            String[] split = temp.split(" ");
+            price = Double.parseDouble(split[2]);
+        }
+        else {
+            String temp = (String) orderView.largeRadioButton.getText();
+            String[] split = temp.split(" ");
+            price = Double.parseDouble(split[2]);
+        }
+
+        if(price * Integer.parseInt(orderView.quantityInput.getText().toString()) > ((MenuActivity) mContext).getBudget()) {
+            Toast.makeText(mContext, "Order over budget.", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            orders.add(new Order(Integer.parseInt(orderView.quantityInput.getText().toString()), orderView.itemName.getText().toString(), price, (Integer) menuView.itemImage.getTag(), mealType));
+            ((MenuActivity) mContext).updateBudget(price * Integer.parseInt(orderView.quantityInput.getText().toString()));
+            Toast.makeText(mContext, "Order saved.", Toast.LENGTH_SHORT).show();
+            dialog.hide();
+        }
+
     }
 }
