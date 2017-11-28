@@ -19,17 +19,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import joaquin.busog.R;
 
 public class MenuAdapter extends BaseAdapter {
 
-    public static ArrayList<Order> orders = new ArrayList<Order>();
+    public static ArrayList<Order> orders = new ArrayList<>();
+//    public static HashMap<Order, Integer> orderss = new HashMap<>();
 
     private Context mContext;
     private String[] mMenuItems;
     private ArrayList<String[]> mList;
-    private String mCategory, mBudget;
+    private String mCategory;
 
     public MenuAdapter(Context context, String[] menuItems, ArrayList<String[]> list, String category) {
         mContext = context;
@@ -283,6 +285,11 @@ public class MenuAdapter extends BaseAdapter {
             Toast.makeText(mContext, "Order over budget.", Toast.LENGTH_SHORT).show();
         }
         else {
+//            if(orderss.containsKey(new Order(orderView.itemName.getText().toString(), price, (Integer) menuView.itemImage.getTag(), mealType))) {
+//                orderss.get(new Order(orderView.itemName.getText().toString(), price, (Integer) menuView.itemImage.getTag(), mealType))
+//            }
+//            orderss.put(new Order(orderView.itemName.getText().toString(), price, (Integer) menuView.itemImage.getTag(), mealType), Integer.parseInt(orderView.quantityInput.getText().toString()));
+
             orders.add(new Order(Integer.parseInt(orderView.quantityInput.getText().toString()), orderView.itemName.getText().toString(), price, (Integer) menuView.itemImage.getTag(), mealType));
             ((MenuActivity) mContext).updateBudget(price * Integer.parseInt(orderView.quantityInput.getText().toString()));
             Toast.makeText(mContext, "Order saved.", Toast.LENGTH_SHORT).show();

@@ -24,6 +24,7 @@ public class MenuActivity extends AppCompatActivity {
 
     private static String mRestaurant;
     private static int mImage;
+    private static double mBudget;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,11 +110,11 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void updateBudget(double price) {
-        double budget = getBudget();
-        budget -= price;
-        if(budget < 0) budget = 0;
+        mBudget = getBudget();
+        mBudget -= price;
+        if(mBudget < 0) mBudget = 0;
 
-        budgetInput.setText(String.format("%.2f", budget));
+        budgetInput.setText(String.format("%.2f", mBudget));
     }
 
     public double getBudget() {
