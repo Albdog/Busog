@@ -23,7 +23,7 @@ import joaquin.busog.mealPlan.RestaurantActivity;
 
 public class HomeScreenTabFragment extends Fragment{
 
-    @BindView(R.id.createMealButton) Button createMealButton;
+    private Button createMealPlanButton;
     private Unbinder mUnbinder;
 
     @Nullable
@@ -44,7 +44,9 @@ public class HomeScreenTabFragment extends Fragment{
         RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(getActivity());
         nearbyRestaurantsRecyclerView.setLayoutManager(layoutManager2);
 
-        createMealButton.setOnClickListener(new View.OnClickListener() {
+        createMealPlanButton = (Button) view.findViewById(R.id.createMealButton);
+
+        createMealPlanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), RestaurantActivity.class);
