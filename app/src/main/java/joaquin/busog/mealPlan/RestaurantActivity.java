@@ -16,12 +16,16 @@ import joaquin.busog.R;
 public class RestaurantActivity extends AppCompatActivity {
 
     @BindView(R.id.restaurantGrid) GridView grid;
+    private DataStore mDataStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant);
         ButterKnife.bind(this);
+
+        mDataStore = new DataStore(this);
+        mDataStore.setString(MenuActivity.KEY_EDITTEXT, "");
 
         String next[];
         ArrayList<String[]> list = new ArrayList<>();

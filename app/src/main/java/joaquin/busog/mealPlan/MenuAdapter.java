@@ -19,17 +19,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import joaquin.busog.R;
 
 public class MenuAdapter extends BaseAdapter {
 
-    public static ArrayList<Order> orders = new ArrayList<Order>();
+    public static HashMap<String, Order> ordersMap = new HashMap<>();
+    public static ArrayList<Order> ordersList = new ArrayList<>();
 
     private Context mContext;
     private String[] mMenuItems;
     private ArrayList<String[]> mList;
-    private String mCategory, mBudget;
+    private String mCategory;
 
     public MenuAdapter(Context context, String[] menuItems, ArrayList<String[]> list, String category) {
         mContext = context;
@@ -100,10 +102,7 @@ public class MenuAdapter extends BaseAdapter {
                     orderBuilder.setView(view);
                     final AlertDialog dialog = orderBuilder.create();
 
-//                    if(mBudget.equals(""))
-//                        Toast.makeText(mContext, "Please enter budget.", Toast.LENGTH_SHORT).show();
-//                    else
-                        dialog.show();
+                    dialog.show();
 
                     orderView.cancelButton.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -279,15 +278,22 @@ public class MenuAdapter extends BaseAdapter {
             price = Double.parseDouble(split[2]);
         }
 
-        if(price * Integer.parseInt(orderView.quantityInput.getText().toString()) > ((MenuActivity) mContext).getBudget()) {
-            Toast.makeText(mContext, "Order over budget.", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            orders.add(new Order(Integer.parseInt(orderView.quantityInput.getText().toString()), orderView.itemName.getText().toString(), price, (Integer) menuView.itemImage.getTag(), mealType));
-            ((MenuActivity) mContext).updateBudget(price * Integer.parseInt(orderView.quantityInput.getText().toString()));
+        if(((MenuActivity) mContext).getBudget() == -1 || price * Integer.parseInt(orderView.quantityInput.getText().toString()) <= ((MenuActivity) mContext).getBudget()) {
+            String itemName = orderView.itemName.getText().toString();
+            String nameType = itemName + mealType;
+
+            if(ordersMap.containsKey(nameType)) {
+                ordersMap.get(nameType).incQuantity(Integer.parseInt(orderView.quantityInput.getText().toString()));
+            }
+            else {
+                ordersMap.put(nameType, new Order(orderView.itemName.getText().toString(), price, Integer.parseInt(orderView.quantityInput.getText().toString()), (Integer) menuView.itemImage.getTag(), mealType));
+                ordersList.add(new Order(orderView.itemName.getText().toString(), price, Integer.parseInt(orderView.quantityInput.getText().toString()), (Integer) menuView.itemImage.getTag(), mealType));
+            }
+
+            if(((MenuActivity) mContext).getBudget() != -1) ((MenuActivity) mContext).updateBudget(price * Integer.parseInt(orderView.quantityInput.getText().toString()));
             Toast.makeText(mContext, "Order saved.", Toast.LENGTH_SHORT).show();
             dialog.hide();
         }
-
+        else Toast.makeText(mContext, "Order over budget.", Toast.LENGTH_SHORT).show();
     }
 }

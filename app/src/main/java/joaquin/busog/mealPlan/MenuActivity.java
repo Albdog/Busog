@@ -15,6 +15,7 @@ import au.com.bytecode.opencsv.CSVReader;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnTextChanged;
 import joaquin.busog.R;
 
 public class MenuActivity extends AppCompatActivity {
@@ -24,6 +25,12 @@ public class MenuActivity extends AppCompatActivity {
 
     private static String mRestaurant;
     private static int mImage;
+    private static double mBudget;
+    public static final String KEY_EDITTEXT = "budget";
+    private DataStore mDataStore;
+    private String[] mMenuItems;
+    private ArrayList<String[]> mList;
+    private String mCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +39,16 @@ public class MenuActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         loadItems("Burgers");
+        mDataStore = new DataStore(this);
+
+        String setBudget = mDataStore.getString(KEY_EDITTEXT);
+        budgetInput.setText(setBudget);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mDataStore.setString(KEY_EDITTEXT, budgetInput.getText().toString());
     }
 
     @OnClick (R.id.burgerButton)
@@ -72,16 +89,42 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void loadItems(String category) {
+    @OnTextChanged (R.id.budgetInput)
+    public void dynamicMenu() {
+        if(!budgetInput.getText().toString().equals("")) {
+            ArrayList<String[]> newList = new ArrayList<>();
+            for(int i = 0; i < mList.size(); i++) {
+                if(!mList.get(i)[2].equals("N/A")) {
+                    if(Double.parseDouble(mList.get(i)[2]) <= Double.parseDouble(budgetInput.getText().toString())) newList.add(mList.get(i));
+                }
+                else if(!mList.get(i)[3].equals("N/A")) {
+                    if(Double.parseDouble(mList.get(i)[3]) <= Double.parseDouble(budgetInput.getText().toString())) newList.add(mList.get(i));
+                }
+                else {
+                    if(Double.parseDouble(mList.get(i)[4]) <= Double.parseDouble(budgetInput.getText().toString()))  newList.add(mList.get(i));
+                }
+            }
 
+            String[] newMenuItems = new String[newList.size()];
+            for(int j = 0; j < newList.size(); j++) {
+                newMenuItems[j] = newList.get(j)[1];
+            }
+
+            updateMenu(newMenuItems, newList, mCategory);
+        }
+        else updateMenu(mMenuItems, mList, mCategory);
+    }
+
+    private void loadItems(String category) {
+        mCategory = category;
         String next[];
-        ArrayList<String[]> list = new ArrayList<>();
+        mList = new ArrayList<>();
         try {
             CSVReader reader = new CSVReader(new InputStreamReader(getAssets().open("CSV/" + mRestaurant + "-" + category + ".csv")));
             while(true) {
                 next = reader.readNext();
                 if(next != null) {
-                    list.add(next);
+                    mList.add(next);
                 } else {
                     break;
                 }
@@ -90,14 +133,14 @@ public class MenuActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        String[] menuItems = new String[list.size()];
+        mMenuItems = new String[mList.size()];
 
-        for(int i = 0; i < list.size(); i++) {
-            menuItems[i] = list.get(i)[1];
+        for(int i = 0; i < mList.size(); i++) {
+            mMenuItems[i] = mList.get(i)[1];
         }
 
-        MenuAdapter menuAdapter = new MenuAdapter(this, menuItems, list, category);
-        menu.setAdapter(menuAdapter);
+        updateMenu(mMenuItems, mList, mCategory);
+        dynamicMenu();
     }
 
     public static void viewMenu(Context context, String restaurant, int image) {
@@ -109,11 +152,11 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void updateBudget(double price) {
-        double budget = getBudget();
-        budget -= price;
-        if(budget < 0) budget = 0;
+        mBudget = getBudget();
+        mBudget -= price;
+        if(mBudget < 0) mBudget = 0;
 
-        budgetInput.setText(String.format("%.2f", budget));
+        budgetInput.setText(String.format("%.2f", mBudget));
     }
 
     public double getBudget() {
@@ -121,7 +164,12 @@ public class MenuActivity extends AppCompatActivity {
             return Double.parseDouble(budgetInput.getText().toString());
         }
         catch (NumberFormatException nfe) {
-            return 0;
+            return -1;
         }
+    }
+
+    private void updateMenu(String[] menuItems, ArrayList<String[]> list, String category) {
+        MenuAdapter menuAdapter = new MenuAdapter(this, menuItems, list, category);
+        menu.setAdapter(menuAdapter);
     }
 }

@@ -19,11 +19,14 @@ public class RestaurantAdapter extends BaseAdapter {
     private Context mContext;
     private String[] mRestaurants;
     private ArrayList<String[]> mList;
+    private DataStore mDataStore;
+    public static final String KEY_EDITTEXT = "recentMeal";
 
     public RestaurantAdapter(Context context, String[] restaurants, ArrayList<String[]> list) {
         mContext = context;
         mRestaurants = restaurants;
         mList = list;
+        mDataStore = new DataStore(mContext);
     }
 
     @Override
@@ -58,6 +61,23 @@ public class RestaurantAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View view) {
                     MenuActivity.viewMenu(mContext, (String) restaurantView.restaurantName.getText(), (Integer) restaurantView.restaurantImage.getTag());
+
+                    if(!MenuAdapter.ordersList.isEmpty() && !MenuAdapter.ordersMap.isEmpty()) {
+                        String entry = "";
+
+                        for(int i = 0; i < MenuAdapter.ordersList.size(); i++) {
+                            entry += MenuAdapter.ordersList.get(i).getItemName() + " ";
+                            entry += MenuAdapter.ordersList.get(i).getPrice() + " ";
+                            entry += MenuAdapter.ordersList.get(i).getQuantity() + " ";
+                            entry += MenuAdapter.ordersList.get(i).getImage() + " ";
+                            if(i == MenuAdapter.ordersList.size() - 1) entry += MenuAdapter.ordersList.get(i).getMealType();
+                            else entry += MenuAdapter.ordersList.get(i).getMealType() + "#";
+                        }
+                        mDataStore.setString(KEY_EDITTEXT, entry);
+                    }
+
+                    MenuAdapter.ordersList.clear();
+                    MenuAdapter.ordersMap.clear();
                 }
             });
         }
