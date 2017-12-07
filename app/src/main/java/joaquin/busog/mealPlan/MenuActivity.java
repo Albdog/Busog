@@ -94,22 +94,14 @@ public class MenuActivity extends AppCompatActivity {
         if(!budgetInput.getText().toString().equals("")) {
             ArrayList<String[]> newList = new ArrayList<>();
             for(int i = 0; i < mList.size(); i++) {
-                try {
-                    if(Double.parseDouble(mList.get(i)[2]) <= Double.parseDouble(budgetInput.getText().toString())) {
-                        newList.add(mList.get(i));
-                    }
+                if(!mList.get(i)[2].equals("N/A")) {
+                    if(Double.parseDouble(mList.get(i)[2]) <= Double.parseDouble(budgetInput.getText().toString())) newList.add(mList.get(i));
                 }
-                catch (NumberFormatException e) {
-                    try {
-                        if(Double.parseDouble(mList.get(i)[3]) <= Double.parseDouble(budgetInput.getText().toString())) {
-                            newList.add(mList.get(i));
-                        }
-                    }
-                    catch (NumberFormatException ex) {
-                        if(Double.parseDouble(mList.get(i)[4]) <= Double.parseDouble(budgetInput.getText().toString())) {
-                            newList.add(mList.get(i));
-                        }
-                    }
+                else if(!mList.get(i)[3].equals("N/A")) {
+                    if(Double.parseDouble(mList.get(i)[3]) <= Double.parseDouble(budgetInput.getText().toString())) newList.add(mList.get(i));
+                }
+                else {
+                    if(Double.parseDouble(mList.get(i)[4]) <= Double.parseDouble(budgetInput.getText().toString()))  newList.add(mList.get(i));
                 }
             }
 
@@ -120,6 +112,7 @@ public class MenuActivity extends AppCompatActivity {
 
             updateMenu(newMenuItems, newList, mCategory);
         }
+        else updateMenu(mMenuItems, mList, mCategory);
     }
 
     private void loadItems(String category) {
