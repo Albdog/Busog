@@ -25,6 +25,8 @@ public class MenuActivity extends AppCompatActivity {
     private static String mRestaurant;
     private static int mImage;
     private static double mBudget;
+    public static final String KEY_EDITTEXT = "budget";
+    private DataStore mDataStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,16 @@ public class MenuActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         loadItems("Burgers");
+        mDataStore = new DataStore(this);
+
+        String setBudget = mDataStore.getString(KEY_EDITTEXT);
+        budgetInput.setText(setBudget);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mDataStore.setString(KEY_EDITTEXT, budgetInput.getText().toString());
     }
 
     @OnClick (R.id.burgerButton)
@@ -122,7 +134,7 @@ public class MenuActivity extends AppCompatActivity {
             return Double.parseDouble(budgetInput.getText().toString());
         }
         catch (NumberFormatException nfe) {
-            return 0;
+            return -1;
         }
     }
 }

@@ -1,36 +1,41 @@
 package joaquin.busog.mealPlan;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import joaquin.busog.R;
 
 public class SummaryAdapter extends BaseAdapter {
 
     private Context mContext;
+    private DataStore mDataStore;
 
     public SummaryAdapter(Context context) {
         mContext = context;
+        mDataStore = new DataStore(mContext);
     }
 
     @Override
     public int getCount() {
-        return MenuAdapter.orders.size();
+        return MenuAdapter.ordersMap.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return MenuAdapter.orders.get(i);
+        return MenuAdapter.ordersMap.get(i);
     }
 
     @Override
@@ -58,27 +63,64 @@ public class SummaryAdapter extends BaseAdapter {
             orderView.removeButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                    builder.setTitle("Remove item?");
-                    builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            MenuAdapter.orders.remove(i);
-                            notifyDataSetChanged();
+                    final RemoveView removeView;
+
+                    AlertDialog.Builder removeBuilder = new AlertDialog.Builder(mContext);
+                    view = LayoutInflater.from(mContext).inflate(R.layout.remove_dialog, null);
+                    removeView = new RemoveView();
+                    removeView.quantitySpinner = view.findViewById(R.id.quantitySpinner);
+                    removeView.cancelButton = view.findViewById(R.id.cancelButton);
+                    removeView.removeButton = view.findViewById(R.id.removeButton);
+
+                    removeView.cancelButton.setText("Cancel");
+                    removeView.removeButton.setText("Remove");
+
+                    updateRemoveUI((String) orderView.quantity.getText(), removeView);
+
+                    removeBuilder.setView(view);
+                    final AlertDialog dialog = removeBuilder.create();
+
+                    dialog.show();
+
+                    removeView.cancelButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dialog.hide();
+                        }
+                    });
+
+                    removeView.removeButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            String[] mealType = ((String) orderView.mealType.getText()).split(" ");
+                            try {
+                                mealType[2] += " " + mealType[3];
+                            }
+                            catch (ArrayIndexOutOfBoundsException e) {}
+                            String key = orderView.itemName.getText() + mealType[2];
+                            MenuAdapter.ordersMap.get(key).decQuantity(Integer.parseInt(removeView.quantitySpinner.getSelectedItem().toString()));
+
+                            double budgetInc = MenuAdapter.ordersMap.get(key).getPrice() * Integer.parseInt(removeView.quantitySpinner.getSelectedItem().toString());
+                            double budget = Double.parseDouble(mDataStore.getString(MenuActivity.KEY_EDITTEXT));
+                            mDataStore.setString(MenuActivity.KEY_EDITTEXT, String.format("%.2f", (budget + budgetInc)));
+
+                            if(MenuAdapter.ordersMap.get(key).getQuantity() == 0) {
+                                MenuAdapter.ordersMap.remove(key);
+                                MenuAdapter.ordersList.remove(i);
+                                Toast.makeText(mContext, "Item removed.", Toast.LENGTH_SHORT).show();
+                                notifyDataSetChanged();
+                            }
+                            else {
+                                Toast.makeText(mContext, "Removed " + removeView.quantitySpinner.getSelectedItem().toString() + " item(s) from order.", Toast.LENGTH_SHORT).show();
+                                updateOrderUI(i, orderView);
+                            }
 
                             SummaryActivity.calculate();
                             ((SummaryActivity)mContext).updateUI();
 
-                            Toast.makeText(mContext, "Item removed.", Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
+                            dialog.hide();
                         }
                     });
-                    builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.dismiss();
-                        }
-                    });
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
                 }
             });
         }
@@ -92,11 +134,11 @@ public class SummaryAdapter extends BaseAdapter {
     }
 
     private void updateOrderUI(int i, OrderView view) {
-        String itemName = MenuAdapter.orders.get(i).getItemName();
-        double price = MenuAdapter.orders.get(i).getPrice();
-        String mealType = MenuAdapter.orders.get(i).getMealType();
-        int quantity = MenuAdapter.orders.get(i).getQuantity();
-        int image = MenuAdapter.orders.get(i).getImage();
+        String itemName = MenuAdapter.ordersList.get(i).getItemName();
+        double price = MenuAdapter.ordersList.get(i).getPrice();
+        String mealType = MenuAdapter.ordersList.get(i).getMealType();
+        int quantity = MenuAdapter.ordersMap.get(itemName + mealType).getQuantity();
+        int image = MenuAdapter.ordersList.get(i).getImage();
 
         view.itemName.setText(itemName);
         view.mealType.setText("Meal Type: " + mealType);
@@ -109,5 +151,21 @@ public class SummaryAdapter extends BaseAdapter {
         ImageView itemImage;
         TextView itemName, quantity, price, mealType;
         Button removeButton;
+    }
+
+    private static class RemoveView extends AppCompatActivity {
+        Spinner quantitySpinner;
+        Button cancelButton, removeButton;
+    }
+
+    private void updateRemoveUI(String quantity, RemoveView view) {
+        ArrayList<String> quantityList = new ArrayList<>();
+        String[] split = quantity.split(" ");
+
+        for(int i = 1; i <= Integer.parseInt(split[1]); i++) {
+            quantityList.add(Integer.toString(i));
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_item, quantityList);
+        view.quantitySpinner.setAdapter(adapter);
     }
 }

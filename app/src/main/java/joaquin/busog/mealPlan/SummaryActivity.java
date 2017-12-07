@@ -48,9 +48,9 @@ public class SummaryActivity extends AppCompatActivity {
         totalCost = 0;
         totalQuantity = 0;
 
-        for(int i = 0; i < MenuAdapter.orders.size(); i++) {
-            double price = MenuAdapter.orders.get(i).getPrice();
-            int quantity = MenuAdapter.orders.get(i).getQuantity();
+        for(int i = 0; i < MenuAdapter.ordersList.size(); i++) {
+            double price = MenuAdapter.ordersList.get(i).getPrice();
+            int quantity = MenuAdapter.ordersMap.get(MenuAdapter.ordersList.get(i).getItemName() + MenuAdapter.ordersList.get(i).getMealType()).getQuantity();
 
             totalCost += price * quantity;
             totalQuantity += quantity;

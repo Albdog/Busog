@@ -58,6 +58,32 @@ public class RestaurantAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View view) {
                     MenuActivity.viewMenu(mContext, (String) restaurantView.restaurantName.getText(), (Integer) restaurantView.restaurantImage.getTag());
+
+                    if(!MenuAdapter.ordersList.isEmpty() && !MenuAdapter.ordersMap.isEmpty()) {
+
+//                        try {
+//                            CSVWriter write = new CSVWriter(new FileWriter("CSV/5-Recent-Meals.csv"), ',');
+//                            String entry = "";
+//
+//                            for(int i = 0; i < MenuAdapter.ordersList.size(); i++) {
+//                                entry += MenuAdapter.ordersList.get(i).getItemName() + " ";
+//                                entry += MenuAdapter.ordersList.get(i).getPrice() + " ";
+//                                entry += MenuAdapter.ordersList.get(i).getQuantity() + " ";
+//                                entry += MenuAdapter.ordersList.get(i).getImage() + " ";
+//                                if(i == MenuAdapter.ordersList.size() - 1) entry += MenuAdapter.ordersList.get(i).getMealType();
+//                                else entry += MenuAdapter.ordersList.get(i).getMealType() + "#";
+//                            }
+//
+//                            String[] entries = entry.split("#");
+//                            write.writeNext(entries);
+//                        }
+//                        catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
+                    }
+
+                    MenuAdapter.ordersList.clear();
+                    MenuAdapter.ordersMap.clear();
                 }
             });
         }

@@ -29,8 +29,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDaRNYo3qn5krGvg4Ag-WGQqABy9-A-fkI"/>
         <activity
-            android:name=".home.NavigationDrawerActivity"
-            android:theme="@style/StartupTheme" />
+            android:name=".home.NavigationDrawerActivity"/>
         <activity
             android:name=".mealPlan.RestaurantActivity"
             android:label="Restaurants"

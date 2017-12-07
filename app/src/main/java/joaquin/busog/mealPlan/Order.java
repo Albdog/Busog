@@ -1,14 +1,14 @@
 package joaquin.busog.mealPlan;
 
 public class Order {
-    public int mQuantity, mImage;
     public String mItemName, mMealType;
     public double mPrice;
+    public int mQuantity, mImage;
 
-    public Order(int quantity, String itemName, double price, int image, String mealType) {
-        mQuantity = quantity;
+    public Order(String itemName,  double price, int quantity, int image, String mealType) {
         mItemName = itemName;
         mPrice = price;
+        mQuantity = quantity;
         mImage = image;
         mMealType = mealType;
     }
@@ -35,6 +35,14 @@ public class Order {
 
     public void setQuantity(int quantity) {
         mQuantity = quantity;
+    }
+
+    public void incQuantity(int quantity) {
+        mQuantity += quantity;
+    }
+
+    public void decQuantity(int quantity) {
+        mQuantity -= quantity;
     }
 
     public double getPrice() {
