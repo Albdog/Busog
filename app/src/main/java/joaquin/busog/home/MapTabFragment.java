@@ -43,6 +43,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -58,6 +59,8 @@ public class MapTabFragment extends Fragment implements OnMapReadyCallback, Acti
     private Location mLastLocation;
     boolean firstRun = true;
     private LocationRequest mLocationRequest;
+    private int queryConfig = 0;
+    public static ArrayList<Place> mPlacesList = new ArrayList<Place>();
 
     @Override
     public void onAttach(Context context) {
@@ -76,6 +79,18 @@ public class MapTabFragment extends Fragment implements OnMapReadyCallback, Acti
         mapFrag.getMapAsync(this);
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+
+        Collections.sort(mPlacesList);
+
+        for(int i = 0; i < mPlacesList.size(); i++) {
+            Log.d("distance", mPlacesList.get(i).getDistance() + "");
+        }
     }
 
     private void enableMyLocation() {
@@ -115,9 +130,15 @@ public class MapTabFragment extends Fragment implements OnMapReadyCallback, Acti
 
         StringBuilder sb = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
         sb.append("location=" + mLatitude + "," + mLongitude);
-        sb.append("&radius=5000");
+        sb.append("&radius=1500");
         sb.append("&types=" + "restaurant");
         sb.append("&sensor=true");
+
+        if(queryConfig == 0) {
+            sb.append("&keyword=Mcdonald");
+        } else{
+            sb.append("&keyword=Jollibee");
+        }
 
         sb.append("&key=AIzaSyDaRNYo3qn5krGvg4Ag-WGQqABy9-A-fkI");
 
@@ -169,9 +190,22 @@ public class MapTabFragment extends Fragment implements OnMapReadyCallback, Acti
         mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(11));
 
         //query places with current location
-        StringBuilder sbValue = new StringBuilder(sbMethod(location));
-        PlacesTask placesTask = new PlacesTask();
-        placesTask.execute(sbValue.toString());
+        Log.d("configtest", queryConfig + "");
+        StringBuilder sbValue1 = new StringBuilder(sbMethod(location));
+        PlacesTask placesTask1 = new PlacesTask();
+        placesTask1.execute(sbValue1.toString());
+
+        if(queryConfig == 0){
+            queryConfig = 1;
+        } else {
+            queryConfig = 0;
+        }
+        Log.d("config", queryConfig + "");
+
+        Log.d("configtest", queryConfig + "");
+        StringBuilder sbValue2 = new StringBuilder(sbMethod(location));
+        PlacesTask placesTask2 = new PlacesTask();
+        placesTask2.execute(sbValue2.toString());
 
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
@@ -185,7 +219,7 @@ public class MapTabFragment extends Fragment implements OnMapReadyCallback, Acti
 
         // Invoked by execute() method of this object
         @Override
-        protected String doInBackground(String... url) {
+        protected String doInBackground(String...url) {
             try {
                 data = downloadUrl(url[0]);
             } catch (Exception e) {
@@ -273,7 +307,7 @@ public class MapTabFragment extends Fragment implements OnMapReadyCallback, Acti
 
             Log.d("Map", "list size: " + list.size());
             // Clears all the existing markers;
-            if (!firstRun) {
+            if (!firstRun && queryConfig == 0) {
 
                 mGoogleMap.clear();
             }
@@ -392,6 +426,8 @@ public class MapTabFragment extends Fragment implements OnMapReadyCallback, Acti
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
+            mPlacesList.add(new Place(place, mLastLocation));
             return place;
         }
     }
