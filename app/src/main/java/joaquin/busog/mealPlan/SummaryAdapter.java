@@ -96,13 +96,17 @@ public class SummaryAdapter extends BaseAdapter {
                             try {
                                 mealType[2] += " " + mealType[3];
                             }
-                            catch (ArrayIndexOutOfBoundsException e) {}
+                            catch (ArrayIndexOutOfBoundsException e) {
+                                e.printStackTrace();
+                            }
                             String key = orderView.itemName.getText() + mealType[2];
                             MenuAdapter.ordersMap.get(key).decQuantity(Integer.parseInt(removeView.quantitySpinner.getSelectedItem().toString()));
 
-                            double budgetInc = MenuAdapter.ordersMap.get(key).getPrice() * Integer.parseInt(removeView.quantitySpinner.getSelectedItem().toString());
-                            double budget = Double.parseDouble(mDataStore.getString(MenuActivity.KEY_EDITTEXT));
-                            mDataStore.setString(MenuActivity.KEY_EDITTEXT, String.format("%.2f", (budget + budgetInc)));
+                            if(!mDataStore.getString(MenuActivity.KEY_EDITTEXT).equals("")) {
+                                double budgetInc = MenuAdapter.ordersMap.get(key).getPrice() * Integer.parseInt(removeView.quantitySpinner.getSelectedItem().toString());
+                                double budget = Double.parseDouble(mDataStore.getString(MenuActivity.KEY_EDITTEXT));
+                                mDataStore.setString(MenuActivity.KEY_EDITTEXT, String.format("%.2f", (budget + budgetInc)));
+                            }
 
                             if(MenuAdapter.ordersMap.get(key).getQuantity() == 0) {
                                 MenuAdapter.ordersMap.remove(key);
